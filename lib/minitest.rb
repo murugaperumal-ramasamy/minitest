@@ -153,7 +153,7 @@ module Minitest
   # sub-classes to run.
 
   def self.__run reporter, options
-    suites = Runnable.runnables.reject { |s| s.runnable_methods.empty? }.shuffle
+    suites = Runnable.runnables.reject { |s| s.runnable_methods.empty? }.sort_by { |ts| ts.name.to_s }
     parallel, serial = suites.partition { |s| s.test_order == :parallel }
 
     # If we run the parallel tests before the serial tests, the parallel tests
